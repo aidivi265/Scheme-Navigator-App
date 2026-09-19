@@ -6,6 +6,8 @@
  * 3. Static Assets — React / Vite frontend SPA
  */
 
+import buildConfig from './worker-env.json';
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -48,13 +50,14 @@ export default {
         const language = body.language || 'en-IN';
 
         const apiKey =
-          env.GEMINI_API_KEY ||
-          env.LITELLM_API_KEY ||
-          env.VITE_GEMINI_API_KEY ||
-          env.GEMINI_KEY;
+          (env.GEMINI_API_KEY || '').trim() ||
+          (env.LITELLM_API_KEY || '').trim() ||
+          (env.VITE_GEMINI_API_KEY || '').trim() ||
+          (env.GEMINI_KEY || '').trim() ||
+          (buildConfig.GEMINI_API_KEY || '').trim();
 
         if (!apiKey) {
-          console.warn('GEMINI_API_KEY not found in env. Available keys:', Object.keys(env || {}));
+          console.warn('GEMINI_API_KEY not found in env or buildConfig. Available keys:', Object.keys(env || {}));
           return Response.json(
             {
               answer:
@@ -70,7 +73,6 @@ export default {
             }
           );
         }
-
 
         const systemText = `You are Mitra (मित्र), the friendly, witty, highly knowledgeable, and empathetic AI Welfare Counselor on SchemeNavigator for Indian citizens.
 Target language code: ${language}.
@@ -92,7 +94,7 @@ If recommending specific schemes, append their slugs at the end like: <schemes>p
         });
 
         const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`,
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -108,6 +110,7 @@ If recommending specific schemes, append their slugs at the end like: <schemes>p
             }),
           }
         );
+
 
         if (!geminiRes.ok) {
           const errText = await geminiRes.text();

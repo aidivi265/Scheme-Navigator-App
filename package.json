@@ -2,7 +2,8 @@
   "name": "scheme-navigator-app",
   "private": true,
   "scripts": {
-    "build": "cd Frontend-Scheme-Navigator-main && npm install --include=optional && npm run build",
+    "build": "node scripts/inject-build-env.cjs && cd Frontend-Scheme-Navigator-main && npm install --include=optional && npm run build",
     "deploy": "npx wrangler deploy"
   }
+
 }
