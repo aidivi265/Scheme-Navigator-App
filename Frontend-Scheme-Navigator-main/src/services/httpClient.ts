@@ -43,6 +43,20 @@ class HttpApiClient {
     this.baseUrl = (baseUrl || '').replace(/\/$/, ''); // strip trailing slash
   }
 
+  private getStaticBaseUrl(): string {
+    if (typeof window !== 'undefined') {
+      const pathname = window.location.pathname;
+      // If deployed on GitHub Pages with repository subpath
+      if (pathname.startsWith('/Scheme-Navigator-App')) {
+        return '/Scheme-Navigator-App/';
+      }
+      // On Cloudflare, Vercel, Netlify, or local, it is hosted at root
+      return '/';
+    }
+    const base = import.meta.env.BASE_URL || '/';
+    return base.endsWith('/') ? base : `${base}/`;
+  }
+
   private async loadStaticSummary(): Promise<{
     schemes: Scheme[];
     categoryCounts: Record<string, number>;
@@ -56,8 +70,7 @@ class HttpApiClient {
 
     this.staticLoadingPromise = (async () => {
       try {
-        const base = import.meta.env.BASE_URL || './';
-        const cleanBase = base.endsWith('/') ? base : `${base}/`;
+        const cleanBase = this.getStaticBaseUrl();
         const res = await fetch(`${cleanBase}data/schemes-summary.json`);
         if (res.ok) {
           this.staticSummaryData = await res.json();
@@ -91,8 +104,7 @@ class HttpApiClient {
       return this.staticFullSchemes;
     }
     try {
-      const base = import.meta.env.BASE_URL || './';
-      const cleanBase = base.endsWith('/') ? base : `${base}/`;
+      const cleanBase = this.getStaticBaseUrl();
       const res = await fetch(`${cleanBase}data/schemes.json`);
       if (res.ok) {
         this.staticFullSchemes = await res.json();
@@ -104,6 +116,7 @@ class HttpApiClient {
     const summary = await this.loadStaticSummary();
     return summary.schemes || [];
   }
+
 
   private getCached<T>(key: string): T | null {
     const entry = this._cache.get(key);
