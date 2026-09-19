@@ -47,12 +47,18 @@ export default {
         const profile = body.profile || null;
         const language = body.language || 'en-IN';
 
-        const apiKey = env.GEMINI_API_KEY;
+        const apiKey =
+          env.GEMINI_API_KEY ||
+          env.LITELLM_API_KEY ||
+          env.VITE_GEMINI_API_KEY ||
+          env.GEMINI_KEY;
+
         if (!apiKey) {
+          console.warn('GEMINI_API_KEY not found in env. Available keys:', Object.keys(env || {}));
           return Response.json(
             {
               answer:
-                'Mitra AI: Please configure GEMINI_API_KEY in your Cloudflare dashboard (Settings > Variables and Secrets) to enable AI chat.',
+                'Mitra AI: Please configure GEMINI_API_KEY in your Cloudflare dashboard (Settings > Variables and Secrets) and click "Deploy" or "Retry deployment" to apply it.',
               referencedSchemes: [],
               profileUpdated: false,
             },
@@ -64,6 +70,7 @@ export default {
             }
           );
         }
+
 
         const systemText = `You are Mitra (मित्र), the friendly, witty, highly knowledgeable, and empathetic AI Welfare Counselor on SchemeNavigator for Indian citizens.
 Target language code: ${language}.
