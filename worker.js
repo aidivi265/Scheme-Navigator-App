@@ -82,11 +82,16 @@ Provide accurate welfare scheme information (eligibility, benefits, documents, h
 If recommending specific schemes, append their slugs at the end like: <schemes>pm-kisan,ayushman-bharat</schemes>.`;
 
         const contents = [];
+        let expectingUser = true;
         for (const h of history.slice(-6)) {
-          contents.push({
-            role: h.role === 'user' ? 'user' : 'model',
-            parts: [{ text: h.content }],
-          });
+          const role = h.role === 'user' ? 'user' : 'model';
+          if (expectingUser && role === 'user') {
+            contents.push({ role: 'user', parts: [{ text: h.content }] });
+            expectingUser = false;
+          } else if (!expectingUser && role === 'model') {
+            contents.push({ role: 'model', parts: [{ text: h.content }] });
+            expectingUser = true;
+          }
         }
         contents.push({
           role: 'user',
@@ -105,11 +110,12 @@ If recommending specific schemes, append their slugs at the end like: <schemes>p
               },
               generationConfig: {
                 temperature: 0.4,
-                maxOutputTokens: 1024,
+                maxOutputTokens: 2048,
               },
             }),
           }
         );
+
 
 
         if (!geminiRes.ok) {

@@ -594,8 +594,9 @@ export const SchemeAdvisorChat: React.FC = () => {
       }
 
       // ── TIER 1: HIGH-FIDELITY NEURAL AUDIO (AUTHENTIC ODIA / INDIC ACCENT) ────
-      if (!isFallbackRetry) {
+      if (!isFallbackRetry && API_BASE_URL) {
         try {
+
           const ttsUrl = `${API_BASE_URL}/api/assistant/tts/?text=${encodeURIComponent(text)}&lang=${encodeURIComponent(activeSpeechLang)}&rate=${speechRate}`;
           const audio = new Audio(ttsUrl);
           chatAudioRef.current = audio;
