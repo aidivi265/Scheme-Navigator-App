@@ -165,13 +165,14 @@ class HttpApiClient {
   }
 
   private async _createSession(): Promise<string> {
-    if (!this.baseUrl || this.isBackendAvailable === false) {
+    if (this.isBackendAvailable === false) {
       return 'offline-session-token';
     }
     try {
+      const url = this.baseUrl ? `${this.baseUrl}/api/sessions/` : '/api/sessions/';
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 6000);
-      const res = await fetch(`${this.baseUrl}/api/sessions/`, {
+      const res = await fetch(url, {
         method: 'POST',
         signal: controller.signal,
       }).finally(() => clearTimeout(timer));
@@ -200,16 +201,13 @@ class HttpApiClient {
     options: RequestInit = {},
     timeoutMs: number = 25000
   ): Promise<T> {
-    if (!this.baseUrl) {
-      throw new Error('Backend server is not configured');
-    }
-
+    const fullUrl = this.baseUrl ? `${this.baseUrl}${path}` : path;
     const token = await this.getToken();
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
 
     try {
-      const res = await fetch(`${this.baseUrl}${path}`, {
+      const res = await fetch(fullUrl, {
         ...options,
         signal: controller.signal,
         headers: {
@@ -222,7 +220,7 @@ class HttpApiClient {
       if (res.status === 401) {
         this._token = null;
         const newToken = await this._createSession();
-        const retry = await fetch(`${this.baseUrl}${path}`, {
+        const retry = await fetch(fullUrl, {
           ...options,
           headers: {
             'Content-Type': 'application/json',
@@ -250,6 +248,7 @@ class HttpApiClient {
       throw err;
     }
   }
+
 
   private post<T>(path: string, body: unknown, timeoutMs: number = 25000): Promise<T> {
     return this.request<T>(path, {
@@ -675,7 +674,7 @@ class HttpApiClient {
     profileUpdated?: boolean;
     updatedProfile?: Partial<UserProfile>;
   }> {
-    if (this.baseUrl) {
+    if (this.isBackendAvailable !== false) {
       try {
         const data = await this.post<{
           answer: string;
@@ -698,6 +697,7 @@ class HttpApiClient {
         console.warn('Backend AI chat unavailable, using local conversational fallback:', err);
       }
     }
+
 
     // Local conversational fallback with scheme search
     const summary = await this.loadStaticSummary();
