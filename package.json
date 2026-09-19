@@ -1,0 +1,8 @@
+{
+  "name": "scheme-navigator-app",
+  "private": true,
+  "scripts": {
+    "build": "npm run build --prefix Frontend-Scheme-Navigator-main",
+    "deploy": "npx wrangler deploy"
+  }
+}
