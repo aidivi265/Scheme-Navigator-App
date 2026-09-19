@@ -1,11 +1,8 @@
 {
   "name": "scheme-navigator-app",
   "private": true,
-  "workspaces": [
-    "Frontend-Scheme-Navigator-main"
-  ],
   "scripts": {
-    "build": "cd Frontend-Scheme-Navigator-main && npm install && npm run build",
+    "build": "cd Frontend-Scheme-Navigator-main && npm install --include=optional && npm run build",
     "deploy": "npx wrangler deploy"
   }
 }
