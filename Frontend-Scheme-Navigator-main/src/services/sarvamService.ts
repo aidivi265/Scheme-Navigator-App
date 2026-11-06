@@ -13,40 +13,40 @@ const SARVAM_TTS_URL = 'https://api.sarvam.ai/text-to-speech';
 const SARVAM_STT_URL = 'https://api.sarvam.ai/speech-to-text';
 const SARVAM_TRANSLATE_URL = 'https://api.sarvam.ai/translate';
 
-// User-configured Sarvam AI API subscription keys
+// User-configured Sarvam AI API subscription keys (Configured via VITE_SARVAM_API_KEY)
 // ── Speech-to-Text (STT) Keys ──
-export const DEFAULT_SARVAM_MITRA_STT_KEY = 'sk_a8tndpvd_tIgYK3ISO34GrEe81rPTQRPd';
+export const DEFAULT_SARVAM_MITRA_STT_KEY = '';
 
 // ── Text-to-Speech (TTS) Keys ──
-export const DEFAULT_SARVAM_HOMEPAGE_TTS_KEY = 'sk_23ky4uff_zXcSIApnbKayzYiavuM3Gd8H';
-export const DEFAULT_SARVAM_MITRA_TTS_KEY = 'sk_kf97benf_qhgh56zkgZGGoxr32b1jvsrB';
+export const DEFAULT_SARVAM_HOMEPAGE_TTS_KEY = '';
+export const DEFAULT_SARVAM_MITRA_TTS_KEY = '';
 
 // ── Translation Keys ──
-export const DEFAULT_SARVAM_HOMEPAGE_TRANSLATE_KEY = 'sk_ds4psbt8_o9FwXHw2SHUTFpVUogYVS8Vj';
-export const DEFAULT_SARVAM_MITRA_TRANSLATE_KEY = 'sk_c3wbxrmf_j3YJihzCjNIhKADHIANQPICL';
+export const DEFAULT_SARVAM_HOMEPAGE_TRANSLATE_KEY = '';
+export const DEFAULT_SARVAM_MITRA_TRANSLATE_KEY = '';
 
 // STT Keys
 export const SARVAM_MITRA_STT_KEY =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SARVAM_MITRA_STT_KEY) ||
-  DEFAULT_SARVAM_MITRA_STT_KEY;
+  (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_SARVAM_MITRA_STT_KEY || import.meta.env?.VITE_SARVAM_API_KEY)) ||
+  '';
 
 // TTS Keys
 export const SARVAM_HOMEPAGE_TTS_KEY =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SARVAM_HOMEPAGE_TTS_KEY) ||
-  DEFAULT_SARVAM_HOMEPAGE_TTS_KEY;
+  (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_SARVAM_HOMEPAGE_TTS_KEY || import.meta.env?.VITE_SARVAM_API_KEY)) ||
+  '';
 
 export const SARVAM_MITRA_TTS_KEY =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SARVAM_MITRA_TTS_KEY) ||
-  DEFAULT_SARVAM_MITRA_TTS_KEY;
+  (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_SARVAM_MITRA_TTS_KEY || import.meta.env?.VITE_SARVAM_API_KEY)) ||
+  '';
 
 // Translation Keys
 export const SARVAM_HOMEPAGE_TRANSLATE_KEY =
-  (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_SARVAM_HOMEPAGE_TRANSLATE_KEY || import.meta.env?.VITE_SARVAM_HOMEPAGE_API_KEY)) ||
-  DEFAULT_SARVAM_HOMEPAGE_TRANSLATE_KEY;
+  (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_SARVAM_HOMEPAGE_TRANSLATE_KEY || import.meta.env?.VITE_SARVAM_HOMEPAGE_API_KEY || import.meta.env?.VITE_SARVAM_API_KEY)) ||
+  '';
 
 export const SARVAM_MITRA_TRANSLATE_KEY =
-  (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_SARVAM_MITRA_TRANSLATE_KEY || import.meta.env?.VITE_SARVAM_MITRA_API_KEY)) ||
-  DEFAULT_SARVAM_MITRA_TRANSLATE_KEY;
+  (typeof import.meta !== 'undefined' && (import.meta.env?.VITE_SARVAM_MITRA_TRANSLATE_KEY || import.meta.env?.VITE_SARVAM_MITRA_API_KEY || import.meta.env?.VITE_SARVAM_API_KEY)) ||
+  '';
 
 // General & Backward-Compatible Aliases
 export const DEFAULT_SARVAM_MITRA_KEY = DEFAULT_SARVAM_MITRA_TRANSLATE_KEY;

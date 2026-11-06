@@ -87,6 +87,7 @@ export interface AuthUser {
   email: string;
   isLoggedIn: boolean;
   avatarUrl?: string;
+  token?: string;
 }
 
 export type MaritalStatus = 'single' | 'married' | 'divorced' | 'deserted';
@@ -816,18 +817,32 @@ export function getAuthUser(): AuthUser | null {
   return _authUser;
 }
 
+export function getAuthToken(): string {
+  const user = getAuthUser();
+  if (user?.token) return user.token;
+  try {
+    return localStorage.getItem('sn_auth_token') || sessionStorage.getItem('sn_auth_token') || '';
+  } catch {
+    return '';
+  }
+}
+
 export function setAuthUser(user: AuthUser | null): void {
   if (user) {
     _authUser = { ...user, isLoggedIn: true };
     writeToStorage(STORAGE_KEYS.AUTH, _authUser);
     try {
       localStorage.setItem('sn_auth_user', JSON.stringify(_authUser));
+      if (user.token) {
+        localStorage.setItem('sn_auth_token', user.token);
+      }
     } catch {}
   } else {
     _authUser = null;
     try {
       localStorage.removeItem(STORAGE_KEYS.AUTH);
       localStorage.removeItem('sn_auth_user');
+      localStorage.removeItem('sn_auth_token');
     } catch {
       // ignore
     }

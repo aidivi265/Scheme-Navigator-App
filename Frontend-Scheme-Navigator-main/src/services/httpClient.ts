@@ -35,6 +35,7 @@ import {
   saveTrackerItem as saveLocalTrackerItem,
   setTrackerItemsList,
   getAuthUser,
+  getAuthToken,
   getLocalNotificationPreferences,
   saveLocalNotificationPreferences,
 } from './storageService';
@@ -510,15 +511,11 @@ class HttpApiClient {
       const currentTimeout = i === 0 ? initialMaxTimeout : Math.min(timeoutMs, 4000);
       const timer = setTimeout(() => controller.abort(), currentTimeout);
 
-      const authEmail = getCurrentAuthEmail();
+      const authToken = getAuthToken();
       const authHeaders: Record<string, string> = {};
-      if (authEmail) {
-        authHeaders['X-Auth-Email'] = authEmail;
-        authHeaders['Authorization'] = `Bearer ${authEmail}`;
-        if (!fullUrl.includes('auth_email=')) {
-          const sep = fullUrl.includes('?') ? '&' : '?';
-          fullUrl = `${fullUrl}${sep}auth_email=${encodeURIComponent(authEmail)}`;
-        }
+      if (authToken) {
+        authHeaders['Authorization'] = `Bearer ${authToken}`;
+        authHeaders['X-Auth-Token'] = authToken;
       }
 
       try {

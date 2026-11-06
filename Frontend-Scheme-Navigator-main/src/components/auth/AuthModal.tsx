@@ -114,7 +114,10 @@ export const AuthModal: React.FC = () => {
       });
 
       if (res.user) {
-        setAuthUser(res.user);
+        setAuthUser({
+          ...res.user,
+          token: (res as any).token || res.user.token || undefined,
+        });
         setStep('success');
         try {
           confetti({
@@ -153,7 +156,10 @@ export const AuthModal: React.FC = () => {
     try {
       const res = await api.loginWithPassword(email.trim(), password);
       if (res.user) {
-        setAuthUser(res.user);
+        setAuthUser({
+          ...res.user,
+          token: (res as any).token || res.user.token || undefined,
+        });
         setStep('success');
         setTimeout(() => {
           closeAuthModal();

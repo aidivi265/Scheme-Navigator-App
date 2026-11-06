@@ -187,6 +187,7 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
     "x-session-token",
+    "x-auth-token",
     "x-auth-email",
 ]
 

@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 from rest_framework.test import APIClient
 
-from .models import EmailOTP
+from .models import EmailOTP, generate_user_auth_token, resolve_request_user
 
 
 class AuthenticationTests(TestCase):
@@ -181,4 +181,53 @@ class AuthenticationTests(TestCase):
         schemes1 = [s.get("id") for s in saved_res1_after.data.get("savedSchemes", [])]
         self.assertNotIn("ayushman-bharat-pmjay", schemes1)
         self.assertIn("sukanya-samriddhi", schemes1)
+
+    def test_forged_email_headers_are_rejected(self):
+        """Verify that raw unverified email headers, query params, and tokens cannot impersonate users."""
+        unauth_client = APIClient()
+
+        # 1. Attacker tries to pass raw victim email in Authorization Bearer
+        res = unauth_client.get(
+            "/api/saved-schemes/",
+            HTTP_AUTHORIZATION=f"Bearer {self.user.email}"
+        )
+        self.assertEqual(res.status_code, 200)
+        # Should return empty list because request is anonymous, NOT the victim's saved schemes
+        self.assertEqual(res.data.get("savedSchemes"), [])
+
+        # 2. Attacker tries to pass X-Auth-Email header
+        res2 = unauth_client.get(
+            "/api/saved-schemes/",
+            HTTP_X_AUTH_EMAIL=self.user.email
+        )
+        self.assertEqual(res2.status_code, 200)
+        self.assertEqual(res2.data.get("savedSchemes"), [])
+
+        # 3. Attacker tries to pass query parameter ?auth_email=
+        res3 = unauth_client.get(f"/api/saved-schemes/?auth_email={self.user.email}")
+        self.assertEqual(res3.status_code, 200)
+        self.assertEqual(res3.data.get("savedSchemes"), [])
+
+    def test_valid_signed_auth_token_succeeds(self):
+        """Verify that genuine cryptographically signed tokens authenticate successfully."""
+        signed_token = generate_user_auth_token(self.user)
+        token_client = APIClient()
+
+        # Save a scheme using signed token
+        res_save = token_client.post(
+            "/api/saved-schemes/pm-kisan/",
+            {"scheme": {"id": "pm-kisan", "name": "PM-KISAN"}},
+            HTTP_AUTHORIZATION=f"Bearer {signed_token}",
+            format="json"
+        )
+        self.assertEqual(res_save.status_code, 200)
+
+        # Retrieve saved schemes using signed token
+        res_get = token_client.get(
+            "/api/saved-schemes/",
+            HTTP_AUTHORIZATION=f"Bearer {signed_token}"
+        )
+        self.assertEqual(res_get.status_code, 200)
+        saved = res_get.data.get("savedSchemes", [])
+        self.assertTrue(any(s.get("id") == "pm-kisan" for s in saved))
 

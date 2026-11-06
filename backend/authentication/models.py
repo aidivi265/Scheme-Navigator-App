@@ -115,7 +115,7 @@ def generate_user_auth_token(user: User) -> str:
 
 
 def validate_user_auth_token(token_str: str) -> User | None:
-    """Validate a cryptographically signed token or email-based session and return the authentic User object."""
+    """Validate a cryptographically signed token or session key and return the authentic User object."""
     if not token_str or not isinstance(token_str, str):
         return None
     clean_token = token_str.strip().strip('"').strip("'")
@@ -128,7 +128,7 @@ def validate_user_auth_token(token_str: str) -> User | None:
         parts = unsigned.split(":", 1)
         if len(parts) == 2:
             pk_str, email = parts
-            return User.objects.filter(pk=int(pk_str), email__iexact=email).first()
+            return User.objects.filter(pk=int(pk_str), email__iexact=email, is_active=True).first()
     except (BadSignature, SignatureExpired, ValueError):
         pass
 
@@ -140,20 +140,9 @@ def validate_user_auth_token(token_str: str) -> User | None:
             data = sess.get_decoded()
             uid = data.get("_auth_user_id")
             if uid:
-                return User.objects.filter(pk=uid).first()
+                return User.objects.filter(pk=uid, is_active=True).first()
     except Exception:
         pass
-
-    # Check if token is directly an email address
-    if "@" in clean_token and "." in clean_token and " " not in clean_token:
-        clean_email = clean_token.lower().strip()
-        user = User.objects.filter(email__iexact=clean_email).first() or User.objects.filter(username__iexact=clean_email).first()
-        if not user:
-            user, _ = User.objects.get_or_create(
-                username=clean_email,
-                defaults={"email": clean_email, "first_name": clean_email.split("@")[0]},
-            )
-        return user
 
     return None
 
@@ -163,12 +152,11 @@ def resolve_request_user(request):
     Cryptographically and securely resolves the authenticated User from:
     1. request.user (if authenticated Django User via session cookie)
     2. request._request.user (underlying HttpRequest)
-    3. Authorization header: Bearer <signed_token_or_email>
-    4. X-Auth-Token header: <signed_token_or_email>
-    5. X-Auth-Email header: <email>
-    6. Query param: ?auth_email=<email>
-    7. Request data: auth_email=<email>
-    8. Django session storage (_auth_user_id)
+    3. Authorization header: Bearer <signed_token>
+    4. X-Auth-Token header: <signed_token>
+    5. Django session storage (_auth_user_id)
+
+    Never accepts raw unverified email headers or parameters.
     """
     underlying = getattr(request, "_request", request)
     candidate = getattr(underlying, "user", None)
@@ -196,55 +184,12 @@ def resolve_request_user(request):
         if validated:
             return validated
 
-    # Check X-Auth-Email header
-    email_hdr = (
-        request.META.get("HTTP_X_AUTH_EMAIL", "")
-        or getattr(underlying, "META", {}).get("HTTP_X_AUTH_EMAIL", "")
-    ).strip()
-    if email_hdr and "@" in email_hdr and "." in email_hdr:
-        clean_email = email_hdr.lower().strip()
-        user = User.objects.filter(email__iexact=clean_email).first() or User.objects.filter(username__iexact=clean_email).first()
-        if not user:
-            user, _ = User.objects.get_or_create(
-                username=clean_email,
-                defaults={"email": clean_email, "first_name": clean_email.split("@")[0]},
-            )
-        return user
-
-    # Check query parameter auth_email
-    query_params = getattr(request, "GET", None) or getattr(underlying, "GET", {})
-    if hasattr(query_params, "get"):
-        q_email = (query_params.get("auth_email") or "").strip()
-        if q_email and "@" in q_email and "." in q_email:
-            clean_email = q_email.lower().strip()
-            user = User.objects.filter(email__iexact=clean_email).first() or User.objects.filter(username__iexact=clean_email).first()
-            if not user:
-                user, _ = User.objects.get_or_create(
-                    username=clean_email,
-                    defaults={"email": clean_email, "first_name": clean_email.split("@")[0]},
-                )
-            return user
-
-    # Check request.data auth_email
-    req_data = getattr(request, "data", None)
-    if isinstance(req_data, dict):
-        d_email = (req_data.get("auth_email") or "").strip()
-        if d_email and "@" in d_email and "." in d_email:
-            clean_email = d_email.lower().strip()
-            user = User.objects.filter(email__iexact=clean_email).first() or User.objects.filter(username__iexact=clean_email).first()
-            if not user:
-                user, _ = User.objects.get_or_create(
-                    username=clean_email,
-                    defaults={"email": clean_email, "first_name": clean_email.split("@")[0]},
-                )
-            return user
-
     # Check underlying Django session
     req_sess = getattr(request, "session", None) or (underlying and getattr(underlying, "session", None))
     if req_sess and hasattr(req_sess, "get"):
         uid = req_sess.get("_auth_user_id")
         if uid:
-            u = User.objects.filter(pk=uid).first()
+            u = User.objects.filter(pk=uid, is_active=True).first()
             if u:
                 return u
 
