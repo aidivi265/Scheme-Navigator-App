@@ -223,15 +223,15 @@ export const SchemeCard: React.FC<SchemeCardProps> = ({ matchResult, onSaveChang
       </div>
 
       {/* Footer CTAs */}
-      <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+      <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium">
-          <MapPin className="w-3.5 h-3.5 text-slate-400" />
+          <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
           <span className="truncate max-w-[130px]">
             {isAllIndia ? tState('All India') : coveredStates.map((s) => tState(s)).join(', ')}
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0 ml-auto sm:ml-0">
           <a
             href={getSafeOfficialUrl(scheme)}
             target="_blank"

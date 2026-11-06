@@ -33,7 +33,7 @@ export const StepPersonal: React.FC<StepPersonalProps> = ({ profile, onChange, o
     <div className="space-y-5 lg:space-y-4 animate-in fade-in duration-200">
       {/* Step Header */}
       <div>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <span className="text-xs font-bold text-teal-800 dark:text-teal-400 uppercase tracking-wider">
             {t('survey.stepOf', { step: 1, total: 6 })} {t('survey.stepPersonal')}
           </span>

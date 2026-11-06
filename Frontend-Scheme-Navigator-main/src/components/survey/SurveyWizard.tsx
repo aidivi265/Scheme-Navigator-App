@@ -475,35 +475,35 @@ export const SurveyWizard: React.FC = () => {
             </div>
 
             {/* Wizard Footer Navigation Actions */}
-            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-4">
+            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 sm:gap-4">
               {currentStep > 1 ? (
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200/80 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs sm:text-sm transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200/80 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs sm:text-sm transition-all cursor-pointer min-w-0"
                 >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>{t('survey.back')}</span>
+                  <ArrowLeft className="w-4 h-4 shrink-0" />
+                  <span className="truncate">{t('survey.back')}</span>
                 </button>
               ) : (
-                <div />
+                <div className="hidden sm:block" />
               )}
 
               <button
                 type="button"
                 onClick={handleNext}
-                className="inline-flex items-center gap-2 px-6 py-2.5 sm:px-8 sm:py-3 rounded-2xl bg-gradient-to-r from-teal-700 via-teal-800 to-teal-950 hover:from-teal-800 hover:to-slate-900 text-white font-extrabold text-xs sm:text-sm shadow-md shadow-teal-950/20 hover:shadow-lg transition-all cursor-pointer group active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-8 sm:py-3 rounded-2xl bg-gradient-to-r from-teal-700 via-teal-800 to-teal-950 hover:from-teal-800 hover:to-slate-900 text-white font-extrabold text-xs sm:text-sm shadow-md shadow-teal-950/20 hover:shadow-lg transition-all cursor-pointer group active:scale-[0.98] min-w-0 ml-auto"
               >
                 {currentStep === totalSteps ? (
                   <>
-                    <Compass className="w-4 h-4 text-emerald-300 group-hover:rotate-45 transition-transform" />
+                    <Compass className="w-4 h-4 text-emerald-300 group-hover:rotate-45 transition-transform shrink-0" />
                     <span>{t('survey.submit')}</span>
-                    <ArrowRight className="w-4 h-4 text-emerald-300" />
+                    <ArrowRight className="w-4 h-4 text-emerald-300 shrink-0" />
                   </>
                 ) : (
                   <>
                     <span>{t('survey.next')}</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform shrink-0" />
                   </>
                 )}
               </button>

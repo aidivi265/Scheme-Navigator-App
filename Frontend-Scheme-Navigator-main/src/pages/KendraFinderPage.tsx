@@ -181,7 +181,7 @@ export const KendraFinderPage: React.FC = () => {
         </div>
 
         {/* Search & Location Card */}
-        <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           {location?.source === 'apimitra_ip' && (
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs">
               <div className="flex items-start gap-2.5">
@@ -194,7 +194,7 @@ export const KendraFinderPage: React.FC = () => {
               <button
                 type="button"
                 onClick={handleUseCurrentGps}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl transition-colors shrink-0 shadow-xs cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl transition-colors shrink-0 shadow-xs cursor-pointer w-full sm:w-auto justify-center"
               >
                 <Crosshair className="w-3.5 h-3.5" />
                 <span>Use Exact GPS</span>
@@ -214,11 +214,11 @@ export const KendraFinderPage: React.FC = () => {
                 className="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-teal-600 shadow-xs"
               />
             </div>
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto shrink-0">
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-3 bg-teal-800 hover:bg-teal-900 text-white font-bold text-sm rounded-2xl shadow-xs transition-colors cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-teal-800 hover:bg-teal-900 text-white font-bold text-sm rounded-2xl shadow-xs transition-colors cursor-pointer disabled:opacity-50"
               >
                 <Search className="w-4 h-4" />
                 <span>Find Kendras</span>
@@ -227,7 +227,7 @@ export const KendraFinderPage: React.FC = () => {
                 type="button"
                 onClick={handleUseCurrentGps}
                 disabled={loading}
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 font-bold text-sm rounded-2xl border border-emerald-300 dark:border-emerald-800 transition-colors cursor-pointer shrink-0 disabled:opacity-50"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 font-bold text-sm rounded-2xl border border-emerald-300 dark:border-emerald-800 transition-colors cursor-pointer shrink-0 disabled:opacity-50"
                 title="Detect live GPS location from device"
               >
                 <Crosshair className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />

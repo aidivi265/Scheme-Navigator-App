@@ -39,7 +39,7 @@ export const RootLayout: React.FC = () => {
       <GlobalVoiceReader />
 
       {/* Main Page Body */}
-      <main className="flex-1 w-full max-w-full overflow-x-hidden pb-24 md:pb-0">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden pb-24 lg:pb-0">
         <Outlet />
       </main>
 

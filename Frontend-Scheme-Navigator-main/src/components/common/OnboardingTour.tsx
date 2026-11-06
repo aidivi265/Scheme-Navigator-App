@@ -166,10 +166,10 @@ export const OnboardingTour: React.FC = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92, y: 20 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-teal-100 overflow-hidden"
+              className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-teal-100 dark:border-slate-800 overflow-hidden my-auto max-h-[90dvh] overflow-y-auto"
             >
               {/* Header Gradient Banner */}
-              <div className="bg-gradient-to-r from-teal-800 via-teal-900 to-slate-900 p-6 text-white relative">
+              <div className="bg-gradient-to-r from-teal-800 via-teal-900 to-slate-900 p-5 sm:p-6 text-white relative">
                 {/* Background glow */}
                 <div className="absolute top-0 right-0 w-40 h-40 bg-teal-500/20 rounded-full blur-2xl pointer-events-none" />
 
@@ -206,56 +206,56 @@ export const OnboardingTour: React.FC = () => {
               </div>
 
               {/* Body: 4 Key Pillars */}
-              <div className="p-6 space-y-5">
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+              <div className="p-4 sm:p-6 space-y-4 sm:space-y-5">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
                   {t('tour.welcomePillarsDesc', undefined, 'Discover financial support, grants, and subsidies tailored to your profile in 4 easy steps:')}
                 </p>
 
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
-                    <div className="p-2 rounded-xl bg-teal-100/70 text-teal-800 shrink-0">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 flex items-start gap-2.5">
+                    <div className="p-2 rounded-xl bg-teal-100/70 dark:bg-teal-950/80 text-teal-800 dark:text-teal-300 shrink-0">
                       <ClipboardCheck className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900">{t('tour.pillar1Title', undefined, '1. Quick Survey')}</h4>
-                      <p className="text-[11px] text-slate-500 mt-0.5">{t('tour.pillar1Desc', undefined, '2 min eligibility check')}</p>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">{t('tour.pillar1Title', undefined, '1. Quick Survey')}</h4>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{t('tour.pillar1Desc', undefined, '2 min eligibility check')}</p>
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
-                    <div className="p-2 rounded-xl bg-emerald-100/70 text-emerald-800 shrink-0">
+                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 flex items-start gap-2.5">
+                    <div className="p-2 rounded-xl bg-emerald-100/70 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 shrink-0">
                       <Award className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900">{t('tour.pillar2Title', undefined, '2. Match Scores')}</h4>
-                      <p className="text-[11px] text-slate-500 mt-0.5">{t('tour.pillar2Desc', undefined, 'Transparent fit metrics')}</p>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">{t('tour.pillar2Title', undefined, '2. Match Scores')}</h4>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{t('tour.pillar2Desc', undefined, 'Transparent fit metrics')}</p>
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
-                    <div className="p-2 rounded-xl bg-blue-100/70 text-blue-800 shrink-0">
+                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 flex items-start gap-2.5">
+                    <div className="p-2 rounded-xl bg-blue-100/70 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300 shrink-0">
                       <Bookmark className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900">{t('tour.pillar3Title', undefined, '3. Save Schemes')}</h4>
-                      <p className="text-[11px] text-slate-500 mt-0.5">{t('tour.pillar3Desc', undefined, '1-click citizen locker')}</p>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">{t('tour.pillar3Title', undefined, '3. Save Schemes')}</h4>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{t('tour.pillar3Desc', undefined, '1-click citizen locker')}</p>
                     </div>
                   </div>
 
-                  <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
-                    <div className="p-2 rounded-xl bg-purple-100/70 text-purple-800 shrink-0">
+                  <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700 flex items-start gap-2.5">
+                    <div className="p-2 rounded-xl bg-purple-100/70 dark:bg-purple-950/80 text-purple-800 dark:text-purple-300 shrink-0">
                       <TrendingUp className="w-4 h-4" />
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold text-slate-900">{t('tour.pillar4Title', undefined, '4. Track Status')}</h4>
-                      <p className="text-[11px] text-slate-500 mt-0.5">{t('tour.pillar4Desc', undefined, 'Checklist & deadlines')}</p>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white">{t('tour.pillar4Title', undefined, '4. Track Status')}</h4>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{t('tour.pillar4Desc', undefined, 'Checklist & deadlines')}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Trust assurance */}
-                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-teal-50/70 border border-teal-100 text-teal-900 text-xs font-medium">
-                  <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-teal-50/70 dark:bg-teal-950/40 border border-teal-100 dark:border-teal-800/60 text-teal-900 dark:text-teal-200 text-xs font-medium">
+                  <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   <span>{t('tour.trustBadge', undefined, '100% Free & Secure. No Aadhaar number or login required.')}</span>
                 </div>
 
@@ -271,18 +271,18 @@ export const OnboardingTour: React.FC = () => {
                     <ArrowRight className="w-4 h-4 text-teal-200" />
                   </button>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                     <button
                       type="button"
                       onClick={handleStartSurveyFromModal}
-                      className="flex-1 py-2.5 px-3 bg-white hover:bg-slate-50 text-teal-900 text-xs font-bold rounded-xl border border-teal-200 hover:border-teal-300 transition-all cursor-pointer"
+                      className="w-full sm:flex-1 py-2.5 px-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-teal-900 dark:text-teal-200 text-xs font-bold rounded-xl border border-teal-200 dark:border-teal-700 hover:border-teal-300 transition-all cursor-pointer text-center"
                     >
                       {t('tour.startSurveyBtn', undefined, '🚀 Start Survey Directly')}
                     </button>
                     <button
                       type="button"
                       onClick={handleDismissWelcome}
-                      className="flex-1 py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition-all cursor-pointer"
+                      className="w-full sm:flex-1 py-2.5 px-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold rounded-xl transition-all cursor-pointer text-center"
                     >
                       {t('tour.exploreOwnBtn', undefined, 'Explore on my own')}
                     </button>

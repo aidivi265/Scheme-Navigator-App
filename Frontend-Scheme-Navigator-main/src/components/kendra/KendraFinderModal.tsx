@@ -241,8 +241,8 @@ export const KendraFinderModal: React.FC<KendraFinderModalProps> = ({
               )}
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-                <form onSubmit={handleLocationSearch} className="flex-1 flex items-center gap-2">
-                  <div className="relative flex-1">
+                <form onSubmit={handleLocationSearch} className="flex-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <div className="relative flex-1 min-w-0">
                     <MapPin className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
@@ -252,22 +252,24 @@ export const KendraFinderModal: React.FC<KendraFinderModalProps> = ({
                       className="w-full pl-9 pr-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-teal-600"
                     />
                   </div>
-                  <button
-                    type="submit"
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-teal-800 hover:bg-teal-900 text-white text-xs font-bold rounded-xl shadow-xs transition-colors cursor-pointer shrink-0"
-                  >
-                    <Search className="w-3.5 h-3.5" />
-                    <span>Search</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleUseCurrentGps}
-                    className="inline-flex items-center gap-1.5 px-3 py-2.5 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold rounded-xl border border-emerald-300 dark:border-emerald-800 transition-colors cursor-pointer shrink-0"
-                    title="Detect live GPS location from device"
-                  >
-                    <Crosshair className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                    <span>Use Exact GPS</span>
-                  </button>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      type="submit"
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-teal-800 hover:bg-teal-900 text-white text-xs font-bold rounded-xl shadow-xs transition-colors cursor-pointer shrink-0"
+                    >
+                      <Search className="w-3.5 h-3.5" />
+                      <span>Search</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleUseCurrentGps}
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3 py-2.5 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 text-xs font-bold rounded-xl border border-emerald-300 dark:border-emerald-800 transition-colors cursor-pointer shrink-0"
+                      title="Detect live GPS location from device"
+                    >
+                      <Crosshair className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                      <span>Use Exact GPS</span>
+                    </button>
+                  </div>
                 </form>
               </div>
 

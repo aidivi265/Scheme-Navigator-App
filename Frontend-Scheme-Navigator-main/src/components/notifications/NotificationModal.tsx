@@ -229,10 +229,10 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
           </p>
 
           {/* Navigation Tabs */}
-          <div className="flex items-center gap-2 mt-4">
+          <div className="flex items-center gap-1.5 sm:gap-2 mt-4 overflow-x-auto pb-1 max-w-full no-scrollbar overscroll-x-contain">
             <button
               onClick={() => setActiveTab('settings')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                 activeTab === 'settings'
                   ? 'bg-white text-emerald-950 shadow-md font-extrabold'
                   : 'bg-white/10 text-white hover:bg-white/20'
@@ -243,7 +243,7 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('logs')}
-              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                 activeTab === 'logs'
                   ? 'bg-white text-emerald-950 shadow-md font-extrabold'
                   : 'bg-white/10 text-white hover:bg-white/20'
@@ -603,15 +603,15 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
             <span>सुरक्षित एवं निःशुल्क • Cancel anytime</span>
           </div>
 
-          <div className="flex items-center gap-2.5 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5 w-full sm:w-auto">
             {activeTab === 'settings' && (
               <button
                 type="button"
                 onClick={handleSendTestNotification}
                 disabled={isSending || isSaving}
-                className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-emerald-600 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/60 font-bold text-xs transition-colors cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-emerald-600 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/60 font-bold text-xs transition-colors cursor-pointer disabled:opacity-50 text-center"
               >
-                <Send className={`w-3.5 h-3.5 ${isSending ? 'animate-pulse' : ''}`} />
+                <Send className={`w-3.5 h-3.5 shrink-0 ${isSending ? 'animate-pulse' : ''}`} />
                 <span>{isSending ? 'भेजा जा रहा है...' : (initialScheme ? 'गाइड भेजें (Send Guide)' : 'परीक्षण संदेश (Send Test)')}</span>
               </button>
             )}
@@ -620,9 +620,9 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
               type="button"
               onClick={handleSavePreferences}
               disabled={isSaving}
-              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-xs shadow-md transition-all cursor-pointer disabled:opacity-50"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-xs shadow-md transition-all cursor-pointer disabled:opacity-50 text-center"
             >
-              <CheckCircle2 className="w-3.5 h-3.5" />
+              <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
               <span>{isSaving ? 'सहेजा जा रहा है...' : 'सेटिंग्स सहेजें (Save Preferences)'}</span>
             </button>
           </div>

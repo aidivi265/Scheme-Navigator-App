@@ -69,7 +69,7 @@ export const SaveSchemeSyncPromptModal: React.FC = () => {
       aria-modal="true"
     >
       <div
-        className="relative w-full max-w-md my-auto flex flex-col bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden text-slate-900 dark:text-white animate-in zoom-in-95 duration-150"
+        className="relative w-full max-w-md my-auto max-h-[90dvh] overflow-y-auto flex flex-col bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden text-slate-900 dark:text-white animate-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Close Button */}

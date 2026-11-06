@@ -24,7 +24,7 @@ export const HeroSection: React.FC = () => {
       <div className="absolute top-4 left-1/4 w-[320px] h-[320px] bg-teal-300/20 dark:bg-teal-500/10 rounded-full blur-3xl pointer-events-none animate-glow-pulse" />
       <div className="absolute top-6 right-1/4 w-[300px] h-[300px] bg-emerald-300/20 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none animate-glow-pulse" />
 
-      <div className="max-w-[1600px] mx-auto pl-6 sm:pl-8 lg:pl-10 xl:pl-14 pr-6 sm:pr-8 lg:pr-10 xl:pr-14 relative z-10 w-full min-w-0 my-auto">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-10 xl:px-14 relative z-10 w-full min-w-0 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 xl:gap-16 items-center w-full min-w-0">
           {/* Left Column: Core Value Proposition */}
           <div className="lg:col-span-6 min-w-0 w-full text-center lg:text-left space-y-4 sm:space-y-5">

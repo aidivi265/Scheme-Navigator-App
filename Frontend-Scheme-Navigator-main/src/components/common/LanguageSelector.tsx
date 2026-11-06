@@ -105,7 +105,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
           aria-expanded={isOpen}
           aria-haspopup="true"
           title={`Current Language: ${selectedLanguage.nativeName} (${selectedLanguage.name})`}
-          className={`inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/90 hover:bg-slate-50 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 text-xs font-semibold shadow-2xs transition-all cursor-pointer shrink-0 min-w-0 max-w-[125px] sm:max-w-[155px] ${className}`}
+          className={`inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700/80 bg-white dark:bg-slate-800/90 hover:bg-slate-50 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 text-xs font-semibold shadow-2xs transition-all cursor-pointer shrink-0 min-w-0 max-w-[95px] sm:max-w-[155px] ${className}`}
         >
           <Globe className="w-3.5 h-3.5 text-teal-700 dark:text-emerald-400 shrink-0" />
           <span className="font-bold text-slate-900 dark:text-white truncate text-[11px] sm:text-xs">

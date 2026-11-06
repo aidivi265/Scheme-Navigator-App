@@ -66,7 +66,7 @@ export const MobileBottomNav: React.FC = () => {
   return (
     <nav
       aria-label="Mobile Navigation"
-      className="md:hidden fixed bottom-0 inset-x-0 z-40 w-full max-w-full overflow-visible bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-slate-200/90 dark:border-slate-800/90 pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-1 shadow-[0_-4px_25px_rgba(0,0,0,0.1)] transition-colors duration-200 touch-manipulation"
+      className="lg:hidden fixed bottom-0 inset-x-0 z-40 w-full max-w-full overflow-visible bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-slate-200/90 dark:border-slate-800/90 pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-1 shadow-[0_-4px_25px_rgba(0,0,0,0.1)] transition-colors duration-200 touch-manipulation"
     >
       <div className="grid grid-cols-5 items-center justify-around px-2 max-w-lg mx-auto">
         {navItems.map((item, idx) => {

@@ -43,6 +43,11 @@
     display: flex;
     flex-direction: column;
   }
+
+  /* Universal responsive media safeguards */
+  img, svg, video, canvas, audio, iframe, embed, object {
+    max-width: 100%;
+  }
 }
 
 /* Hide scrollbars cleanly for mobile carousels and tab lists */

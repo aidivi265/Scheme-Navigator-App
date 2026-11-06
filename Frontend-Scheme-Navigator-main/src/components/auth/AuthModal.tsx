@@ -289,7 +289,7 @@ export const AuthModal: React.FC = () => {
         )}
 
         {/* Modal Body */}
-        <div className="p-5 sm:p-6 space-y-4 overflow-y-auto max-h-[calc(90vh-140px)]">
+        <div className="p-4 sm:p-6 space-y-4 overflow-y-auto max-h-[calc(90dvh-120px)]">
           {/* Error Message Alert */}
           {errorMessage && (
             <div className="p-3 bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-900/60 rounded-xl flex items-start gap-2.5 text-xs text-red-700 dark:text-red-300">
@@ -469,7 +469,7 @@ export const AuthModal: React.FC = () => {
 
 
               {/* 6-box OTP Input */}
-              <div className="flex items-center justify-center gap-2 sm:gap-2.5 py-2">
+              <div className="flex items-center justify-center gap-1.5 sm:gap-2.5 py-2 max-w-full">
                 {otp.map((digit, idx) => (
                   <input
                     key={idx}
@@ -483,7 +483,7 @@ export const AuthModal: React.FC = () => {
                     onChange={(e) => handleOtpChange(idx, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(idx, e)}
                     onPaste={handleOtpPaste}
-                    className="w-10 h-12 sm:w-12 sm:h-14 text-center text-lg sm:text-xl font-black bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl focus:border-teal-600 focus:outline-hidden focus:ring-2 focus:ring-teal-500/20 text-slate-900 dark:text-white transition-all"
+                    className="w-9 h-11 xs:w-10 xs:h-12 sm:w-12 sm:h-14 text-center text-base sm:text-xl font-black bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl focus:border-teal-600 focus:outline-hidden focus:ring-2 focus:ring-teal-500/20 text-slate-900 dark:text-white transition-all"
                   />
                 ))}
               </div>

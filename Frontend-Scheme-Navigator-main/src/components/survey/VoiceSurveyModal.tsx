@@ -155,18 +155,18 @@ export const VoiceSurveyModal: React.FC<VoiceSurveyModalProps> = ({
         <div className="p-5 sm:p-6 space-y-4 overflow-y-auto flex-1">
           {/* Active Language Bar & Dropdown Toggle */}
           <div className="relative">
-            <div className="flex items-center justify-between bg-slate-100 p-2 rounded-2xl">
-              <div className="flex items-center gap-2 px-2 text-xs font-bold text-slate-700">
-                <Languages className="w-4 h-4 text-teal-700" />
-                <span>{t('voice.selected_lang', undefined, 'Selected Language:')}</span>
-                <span className="px-2.5 py-1 rounded-xl bg-teal-800 text-white text-xs font-bold">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between bg-slate-100 dark:bg-slate-800/80 p-2 sm:p-2.5 rounded-2xl gap-2">
+              <div className="flex items-center gap-2 px-1 sm:px-2 text-xs font-bold text-slate-700 dark:text-slate-200 flex-wrap min-w-0">
+                <Languages className="w-4 h-4 text-teal-700 dark:text-teal-400 shrink-0" />
+                <span className="shrink-0">{t('voice.selected_lang', undefined, 'Selected Language:')}</span>
+                <span className="px-2.5 py-1 rounded-xl bg-teal-800 text-white text-xs font-bold truncate">
                   {selectedLanguage.nativeName} ({selectedLanguage.name})
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => setShowLanguageGrid(!showLanguageGrid)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-teal-900 hover:bg-teal-50 border border-slate-200 text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-700 text-teal-900 dark:text-teal-200 hover:bg-teal-50 dark:hover:bg-slate-650 border border-slate-200 dark:border-slate-600 text-xs font-bold transition-all shadow-2xs cursor-pointer shrink-0"
               >
                 <span>{t('voice.change_lang', undefined, 'Change Language')}</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showLanguageGrid ? 'rotate-180' : ''}`} />

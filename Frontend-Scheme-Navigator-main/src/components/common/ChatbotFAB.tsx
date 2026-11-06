@@ -32,7 +32,7 @@ export const ChatbotFAB: React.FC = () => {
   };
 
   return (
-    <div className="hidden md:flex fixed bottom-6 right-6 z-50 flex-col items-end gap-3">
+    <div className="hidden md:flex fixed bottom-22 lg:bottom-6 right-4 sm:right-6 z-50 flex-col items-end gap-3">
       {/* Pop-out card panel */}
       {isOpen && (
         <div className="w-[calc(100vw-2.5rem)] sm:w-96 bg-white dark:bg-slate-900 rounded-3xl border border-teal-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-200 z-50 max-h-[85vh] overflow-y-auto">

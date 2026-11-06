@@ -153,14 +153,14 @@ export const SchemeDetailHero: React.FC<SchemeDetailHeroProps> = ({
             <span>{t('scheme_detail.direct_link_badge', undefined, 'Direct link to official government portal available')}</span>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => openNotificationModal(scheme, 'scheme_summary')}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-sm rounded-2xl shadow-md transition-all cursor-pointer border border-emerald-400/40"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-emerald-600/90 hover:bg-emerald-500 text-white font-bold text-sm rounded-2xl shadow-md transition-all cursor-pointer border border-emerald-400/40"
               title="Get Scheme Details on WhatsApp or SMS"
             >
-              <MessageSquare className="w-4 h-4" />
+              <MessageSquare className="w-4 h-4 shrink-0" />
               <span>WhatsApp / SMS विवरण पाएं</span>
             </button>
 
@@ -168,10 +168,10 @@ export const SchemeDetailHero: React.FC<SchemeDetailHeroProps> = ({
               href={getSafeOfficialUrl(scheme)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-extrabold text-sm rounded-2xl shadow-lg shadow-emerald-950/40 hover:shadow-xl transition-all cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 hover:to-teal-300 text-slate-950 font-extrabold text-sm rounded-2xl shadow-lg shadow-emerald-950/40 hover:shadow-xl transition-all cursor-pointer text-center"
             >
               <span>{t('scheme_detail.proceed_app_btn', undefined, 'Proceed to Official Application')}</span>
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-4 h-4 shrink-0" />
             </a>
           </div>
         </div>

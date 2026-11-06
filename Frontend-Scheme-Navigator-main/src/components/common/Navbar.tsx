@@ -77,10 +77,10 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full max-w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 shadow-xs transition-colors duration-200">
-      <div className="w-full max-w-[1600px] mx-auto pl-4 sm:pl-6 lg:pl-8 xl:pl-12 pr-3 sm:pr-4 lg:pr-5 xl:pr-8">
-        <div className="flex items-center justify-between h-13 sm:h-14 lg:h-16 gap-1.5 xl:gap-3 min-w-0">
+      <div className="w-full max-w-[1600px] mx-auto pl-3 sm:pl-6 lg:pl-8 xl:pl-12 pr-2.5 sm:pr-4 lg:pr-5 xl:pr-8">
+        <div className="flex items-center justify-between h-13 sm:h-14 lg:h-16 gap-1 sm:gap-1.5 xl:gap-3 min-w-0">
           {/* Brand Logo */}
-          <div className="shrink-0 flex items-center">
+          <div className="shrink-0 flex items-center min-w-0">
             <CompassLogo size="sm" />
           </div>
 
