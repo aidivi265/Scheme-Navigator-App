@@ -630,6 +630,16 @@ export function toggleSaveScheme(schemeOrId: string | Scheme, schemeObj?: Scheme
   }
 }
 
+export function saveScheme(scheme: Scheme): boolean {
+  if (!scheme) return false;
+  const id = scheme.id || scheme.slug;
+  if (!id) return false;
+  if (!isSchemeSaved(id)) {
+    return toggleSaveScheme(scheme);
+  }
+  return true;
+}
+
 // ── Application Guidance Tracker ─────────────────────────────────────────────
 
 export function getTrackerItems(): TrackerItem[] {

@@ -236,7 +236,7 @@ export const DashboardPage: React.FC = () => {
               <span>{t('dashboard.title', undefined, 'Citizen Command Center')}</span>
             </div>
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-950 dark:text-white tracking-tight">
-              {t('dashboard.welcome', undefined, 'Welcome back,')} {transliterateName(authUser?.name || profile?.name, langCode) || t('common.citizen')}
+              {t('dashboard.welcome', undefined, 'Welcome back,')} {transliterateName(authUser?.name || profile?.name, langCode) || t('common.citizen', undefined, 'Citizen')}
             </h1>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl font-normal">
               {t('dashboard.subtitle', undefined, 'Manage your personal profile signals, bookmarked schemes, and application progress.')}

@@ -57,10 +57,16 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
+try:
+    import whitenoise  # noqa: F401
+    _has_whitenoise = True
+except ImportError:
+    _has_whitenoise = False
+
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+] + (["whitenoise.middleware.WhiteNoiseMiddleware"] if _has_whitenoise else []) + [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",

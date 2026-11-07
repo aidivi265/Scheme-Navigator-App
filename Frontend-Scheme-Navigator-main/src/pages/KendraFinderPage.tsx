@@ -44,11 +44,14 @@ export const KendraFinderPage: React.FC = () => {
     if (!cleanQuery) return;
 
     setLoading(true);
+    setGpsError(null);
+    let found = false;
     try {
       const foundLoc = await searchLocationByQuery(cleanQuery);
       if (foundLoc) {
         setLocation(foundLoc);
         setSearchQuery(foundLoc.pincode);
+        found = true;
       } else if (/^\d{6}$/.test(cleanQuery)) {
         const res = await lookupPincodeFromApimitra(cleanQuery);
         if (res) {
@@ -63,10 +66,15 @@ export const KendraFinderPage: React.FC = () => {
             offices: res.offices,
           };
           setLocation(updated);
+          found = true;
         }
+      }
+      if (!found) {
+        setGpsError(`Could not find centers for "${cleanQuery}". Please check the spelling or try entering a 6-digit PIN code.`);
       }
     } catch (err) {
       console.warn('Search failed:', err);
+      setGpsError(`Search failed for "${cleanQuery}". Please try again.`);
     } finally {
       setLoading(false);
     }

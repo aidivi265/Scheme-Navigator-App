@@ -359,43 +359,46 @@ export const parseVoiceInput = (rawText: string): VoiceParseResult => {
   }
 
   // 6. STATE & DISTRICT PARSING
-  // Check short state acronyms with word boundary first (e.g. UP, MP, HP, AP, WB, DL, UK)
-  const stateAcronyms: Record<string, string> = {
-    up: 'Uttar Pradesh',
-    mp: 'Madhya Pradesh',
-    ap: 'Andhra Pradesh',
-    hp: 'Himachal Pradesh',
-    wb: 'West Bengal',
-    dl: 'Delhi',
-    uk: 'Uttarakhand',
-    tn: 'Tamil Nadu',
-    mh: 'Maharashtra',
-    rj: 'Rajasthan',
-    pb: 'Punjab',
-    hr: 'Haryana',
-    br: 'Bihar',
-    ka: 'Karnataka',
-    kl: 'Kerala',
-    gj: 'Gujarat',
-    od: 'Odisha',
-    jh: 'Jharkhand',
-    cg: 'Chhattisgarh',
-    ts: 'Telangana',
-    as: 'Assam',
-  };
+  // First, check full multilingual state names (sorted by descending length)
+  const sortedStateAliases = Object.entries(MULTILINGUAL_STATE_MAP).sort(
+    (a, b) => b[0].length - a[0].length
+  );
 
-  for (const [acronym, stateName] of Object.entries(stateAcronyms)) {
-    const acronymRegex = new RegExp(`\\b${acronym}\\b`, 'i');
-    if (acronymRegex.test(text)) {
+  for (const [alias, stateName] of sortedStateAliases) {
+    if (text.includes(alias.toLowerCase())) {
       profile.state = stateName;
       entities.push({ field: 'state', value: stateName, label: 'State' });
       break;
     }
   }
 
+  // Fallback: Check unambiguous short state acronyms with word boundary if no full name matched
   if (!profile.state) {
-    for (const [alias, stateName] of Object.entries(MULTILINGUAL_STATE_MAP)) {
-      if (text.includes(alias.toLowerCase())) {
+    const stateAcronyms: Record<string, string> = {
+      up: 'Uttar Pradesh',
+      mp: 'Madhya Pradesh',
+      ap: 'Andhra Pradesh',
+      hp: 'Himachal Pradesh',
+      wb: 'West Bengal',
+      dl: 'Delhi',
+      uk: 'Uttarakhand',
+      tn: 'Tamil Nadu',
+      mh: 'Maharashtra',
+      rj: 'Rajasthan',
+      pb: 'Punjab',
+      hr: 'Haryana',
+      br: 'Bihar',
+      kl: 'Kerala',
+      gj: 'Gujarat',
+      od: 'Odisha',
+      jh: 'Jharkhand',
+      cg: 'Chhattisgarh',
+      ts: 'Telangana',
+    };
+
+    for (const [acronym, stateName] of Object.entries(stateAcronyms)) {
+      const acronymRegex = new RegExp(`\\b${acronym}\\b`, 'i');
+      if (acronymRegex.test(text)) {
         profile.state = stateName;
         entities.push({ field: 'state', value: stateName, label: 'State' });
         break;

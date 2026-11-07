@@ -130,12 +130,12 @@ export const SchemeDetailPage: React.FC = () => {
   if (!scheme) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center px-4 py-16">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 text-center space-y-4 max-w-md shadow-sm">
-          <div className="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mx-auto">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 sm:p-12 border border-slate-200 dark:border-slate-800 text-center space-y-4 max-w-md shadow-sm">
+          <div className="w-14 h-14 rounded-2xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 flex items-center justify-center mx-auto">
             <AlertCircle className="w-7 h-7" />
           </div>
-          <h2 className="text-xl font-bold text-slate-900">{t('scheme_detail.not_found_title', undefined, 'Scheme Not Found')}</h2>
-          <p className="text-xs text-slate-500">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">{t('scheme_detail.not_found_title', undefined, 'Scheme Not Found')}</h2>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             {t('scheme_detail.not_found_desc', undefined, 'The requested scheme may have been archived or updated in our catalog.')}
           </p>
           <Link

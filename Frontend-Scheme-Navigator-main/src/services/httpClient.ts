@@ -258,14 +258,15 @@ class HttpApiClient {
   }
 
   private getStaticBaseUrl(): string {
-    if (typeof window !== 'undefined') {
-      const pathname = window.location.pathname;
+    if (typeof window !== 'undefined' && window.location) {
+      const origin = window.location.origin && window.location.origin !== 'null' ? window.location.origin : '';
+      const pathname = window.location.pathname || '';
       // If deployed on GitHub Pages with repository subpath
       if (pathname.startsWith('/Scheme-Navigator-App')) {
-        return '/Scheme-Navigator-App/';
+        return `${origin}/Scheme-Navigator-App/`;
       }
       // On Cloudflare, Vercel, Netlify, or local, it is hosted at root
-      return '/';
+      return origin ? `${origin}/` : '/';
     }
     const base = import.meta.env.BASE_URL || '/';
     return base.endsWith('/') ? base : `${base}/`;
@@ -448,7 +449,8 @@ class HttpApiClient {
     for (let i = 0; i < candidates.length; i++) {
       const candUrl = candidates[i];
       try {
-        const url = candUrl ? `${candUrl}/api/sessions/` : '/api/sessions/';
+        const origin = (typeof window !== 'undefined' && window.location?.origin && window.location.origin !== 'null') ? window.location.origin : '';
+        const url = candUrl ? `${candUrl}/api/sessions/` : (origin ? `${origin}/api/sessions/` : '/api/sessions/');
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), 5000);
         const res = await fetch(url, {
@@ -504,7 +506,8 @@ class HttpApiClient {
 
     for (let i = 0; i < sortedCandidates.length; i++) {
       const candUrl = sortedCandidates[i];
-      let fullUrl = candUrl ? `${candUrl}${path}` : path;
+      const origin = (typeof window !== 'undefined' && window.location?.origin && window.location.origin !== 'null') ? window.location.origin : '';
+      let fullUrl = candUrl ? `${candUrl}${path}` : (origin ? `${origin}${path}` : path);
       const token = await this.getToken();
       const controller = new AbortController();
       const initialMaxTimeout = this.isBackendAvailable === null ? Math.min(timeoutMs, 2500) : timeoutMs;

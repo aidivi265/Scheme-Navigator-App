@@ -507,9 +507,11 @@ export const ExplorePage: React.FC = () => {
             )}
           </div>
         ) : (
-          <div className="bg-white rounded-3xl p-12 border border-slate-200 text-center space-y-4 shadow-sm">
-            <h3 className="text-lg font-bold text-slate-900">{t('explore.noResults')}</h3>
-            <p className="text-xs text-slate-500">{t('explore.noResults')}</p>
+          <div className="bg-white dark:bg-slate-900 rounded-3xl p-12 border border-slate-200 dark:border-slate-800 text-center space-y-4 shadow-sm">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white">{t('explore.noResults', undefined, 'No matching schemes found')}</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {t('explore.noResultsDesc', undefined, 'Try adjusting your search keywords, clearing filters, or browsing all categories.')}
+            </p>
             <button
               onClick={() => {
                 setSelectedCategory('All');
