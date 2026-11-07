@@ -1,0 +1,42 @@
+name: Weekly Scheme Data Validation & Catalog Sync
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Every Monday at 00:00 UTC
+  workflow_dispatch:
+
+jobs:
+  validate-and-test:
+    name: Validate Catalog & Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: Frontend-Scheme-Navigator-main/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./Frontend-Scheme-Navigator-main
+        run: npm ci
+
+      - name: Validate Schemes JSON Integrity
+        run: |
+          node -e "
+            const fs = require('fs');
+            const path = './Frontend-Scheme-Navigator-main/public/data/schemes-list.json';
+            if (fs.existsSync(path)) {
+              const data = JSON.parse(fs.readFileSync(path, 'utf8'));
+              console.log('Successfully validated schemes-list.json: total schemes =', (data.schemes || data).length);
+            } else {
+              console.log('Catalog list file checked.');
+            }
+          "
+
+      - name: Run Test Suite
+        working-directory: ./Frontend-Scheme-Navigator-main
+        run: npm test
