@@ -69,12 +69,12 @@ const LANGUAGE_NAMES: Record<string, string> = {
 };
 
 const MODELS = [
-  'gemini-flash-lite-latest',
-  'gemma-4-26b-a4b-it',
-  'gemini-flash-latest',
+  'gemini-2.5-flash',
   'gemini-2.5-flash-lite',
-  'gemini-3.8-flash',
-  'gemini-pro-latest',
+  'gemini-2.0-flash',
+  'gemini-1.5-flash',
+  'gemini-1.5-flash-8b',
+  'gemini-1.5-pro',
 ];
 
 const GOOGLE_LANG_MAP: Record<string, string> = {

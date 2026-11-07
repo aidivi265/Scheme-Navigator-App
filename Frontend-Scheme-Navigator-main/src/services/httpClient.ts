@@ -1183,9 +1183,6 @@ class HttpApiClient {
     // ── TIER 1: Backend Assistant API (Adequate 15s timeout for AI generation) ───
     if (this.isBackendAvailable !== false) {
       try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000);
-
         const data = await this.post<{
           answer: string;
           referencedSchemes: Scheme[];
@@ -1196,7 +1193,7 @@ class HttpApiClient {
           history: history || [],
           profile: profile || undefined,
           language: language || 'en-IN',
-        });
+        }, 15000);
         let finalSchemes = Array.isArray(data.referencedSchemes) ? [...data.referencedSchemes] : [];
         if (finalSchemes.length > 0 && finalSchemes.length < 5) {
           try {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { CompassLogo } from './CompassLogo';
 import {
@@ -31,6 +31,28 @@ export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isKendraModalOpen, setIsKendraModalOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close user dropdown when clicking outside or pressing Escape
+  useEffect(() => {
+    if (!isUserDropdownOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (userDropdownRef.current && !userDropdownRef.current.contains(e.target as Node)) {
+        setIsUserDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsUserDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isUserDropdownOpen]);
 
   const {
     savedSchemeIds,
@@ -281,7 +303,7 @@ export const Navbar: React.FC = () => {
                 <span>{t('nav.signIn', undefined, 'Sign In')}</span>
               </button>
             ) : (
-              <div className="relative">
+              <div className="relative" ref={userDropdownRef}>
                 <button
                   type="button"
                   onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}

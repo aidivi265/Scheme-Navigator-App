@@ -6,6 +6,7 @@ import { AppProvider } from '../store/appStore';
 import { HomePage } from '../pages/HomePage';
 import { TrackerPage } from '../pages/TrackerPage';
 import { AnalyzingPage } from '../pages/AnalyzingPage';
+import { NotFoundPage } from '../pages/NotFoundPage';
 import { Navbar } from '../components/common/Navbar';
 
 // Mock scrollTo
@@ -66,5 +67,20 @@ describe('Core Page Components Render Tests', () => {
     );
 
     expect(screen.getByText(/Application Guidance Tracker/i)).toBeInTheDocument();
+  });
+
+  it('renders NotFoundPage with 404 details and search input', () => {
+    render(
+      <AppProvider>
+        <MemoryRouter>
+          <NotFoundPage />
+        </MemoryRouter>
+      </AppProvider>
+    );
+
+    expect(screen.getByText(/404/i)).toBeInTheDocument();
+    expect(screen.getByText(/Page Not Found/i)).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /search/i })).toBeInTheDocument();
   });
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Scheme } from '../../types';
 import { StatusPill } from '../common/StatusPill';
 import {
@@ -10,6 +10,7 @@ import {
   Share2,
   Phone,
   CheckCircle2,
+  Check,
   MessageSquare,
 } from 'lucide-react';
 import { isSchemeSaved } from '../../services/storageService';
@@ -32,6 +33,7 @@ export const SchemeDetailHero: React.FC<SchemeDetailHeroProps> = ({
 }) => {
   const { t, tState, tp, langCode } = useTranslation();
   const { openNotificationModal } = useAppStore();
+  const [isCopied, setIsCopied] = useState(false);
   const isSaved = isSchemeSaved(scheme?.id || scheme?.slug);
 
   const coveredStates = Array.isArray(scheme?.coveredStates) ? scheme.coveredStates : ['All India'];
@@ -45,16 +47,25 @@ export const SchemeDetailHero: React.FC<SchemeDetailHeroProps> = ({
     isOfficialVerified: true,
   };
 
-  const handleShare = () => {
+  const handleShare = async () => {
     if (navigator.share) {
-      navigator.share({
-        title: scheme.name,
-        text: scheme.tagline || scheme.shortDescription,
-        url: window.location.href,
-      }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert('Scheme link copied to clipboard!');
+      try {
+        await navigator.share({
+          title: scheme.name,
+          text: scheme.tagline || scheme.shortDescription,
+          url: window.location.href,
+        });
+        return;
+      } catch {
+        // user cancelled or share failed, fallback to copy
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2500);
+    } catch {
+      // ignore
     }
   };
 
@@ -76,11 +87,17 @@ export const SchemeDetailHero: React.FC<SchemeDetailHeroProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={handleShare}
-              className="p-2.5 rounded-xl bg-teal-800/60 hover:bg-teal-700/80 border border-teal-700/60 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
-              title={t('common.share', undefined, 'Share')}
+              className={`p-2.5 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+                isCopied
+                  ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-bold'
+                  : 'bg-teal-800/60 hover:bg-teal-700/80 border-teal-700/60 text-white'
+              }`}
+              title={isCopied ? 'Link Copied!' : t('common.share', undefined, 'Share')}
             >
-              <Share2 className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('common.share', undefined, 'Share')}</span>
+              {isCopied ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+              <span className="hidden sm:inline">
+                {isCopied ? 'Link Copied!' : t('common.share', undefined, 'Share')}
+              </span>
             </button>
 
             <button

@@ -33,29 +33,34 @@ export const MobileBottomNav: React.FC = () => {
 
   const navItems = [
     {
+      id: 'mobile-nav-home',
       to: '/',
       label: getShortNavLabel('home'),
       icon: Home,
       exact: true,
     },
     {
+      id: 'mobile-nav-explore',
       to: '/explore',
       label: getShortNavLabel('schemes'),
       icon: Compass,
     },
     {
+      id: 'mobile-nav-check',
       action: () => handleCheckEligibility(navigate),
       label: getShortNavLabel('check'),
       isCenterAction: true,
       icon: Sparkles,
     },
     {
+      id: 'mobile-nav-ai',
       to: '/assistant',
       label: getShortNavLabel('ai'),
       icon: Bot,
       isAi: true,
     },
     {
+      id: 'mobile-nav-saved',
       to: '/saved',
       label: getShortNavLabel('saved'),
       icon: Bookmark,
@@ -78,6 +83,7 @@ export const MobileBottomNav: React.FC = () => {
             return (
               <button
                 key={idx}
+                id={item.id}
                 type="button"
                 onClick={item.action}
                 className="flex flex-col items-center justify-center -mt-5 group cursor-pointer focus:outline-hidden active:scale-95 transition-transform w-full min-w-0 px-0.5 select-none relative z-10"
@@ -107,6 +113,7 @@ export const MobileBottomNav: React.FC = () => {
           return (
             <NavLink
               key={idx}
+              id={item.id}
               to={item.to!}
               className={`flex flex-col items-center justify-center py-1 min-h-[46px] transition-all relative w-full min-w-0 px-0.5 select-none active:scale-95 ${
                 isActive

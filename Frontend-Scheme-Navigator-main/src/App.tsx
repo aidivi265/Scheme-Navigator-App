@@ -21,6 +21,7 @@ const KendraFinderPage = lazy(() => import('./pages/KendraFinderPage').then((m) 
 const EventsPage = lazy(() => import('./pages/EventsPage').then((m) => ({ default: m.EventsPage })));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage').then((m) => ({ default: m.PrivacyPage })));
 const TermsPage = lazy(() => import('./pages/TermsPage').then((m) => ({ default: m.TermsPage })));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })));
 
 const PageLoader = () => (
   <div className="min-h-[50vh] flex items-center justify-center p-8">
@@ -58,7 +59,7 @@ export function App() {
                 <Route path="/camps" element={<Navigate to="/events" replace />} />
                 <Route path="/privacy" element={<PrivacyPage />} />
                 <Route path="/terms" element={<TermsPage />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
           </Suspense>

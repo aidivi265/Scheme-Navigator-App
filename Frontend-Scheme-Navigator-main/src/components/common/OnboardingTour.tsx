@@ -38,33 +38,35 @@ export const OnboardingTour: React.FC = () => {
     }
   }, []);
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+
   const tourSteps: Step[] = [
     {
-      target: '#nav-check-eligibility',
+      target: isMobile ? '#mobile-nav-check' : '#nav-check-eligibility',
       title: t('tour.step1_title', undefined, '1. Smart Eligibility Survey 📋'),
       content: t('tour.step1_desc', undefined, 'Start your journey here! Take a quick 2-minute survey without needing Aadhaar or sensitive documents to discover personalized schemes.'),
-      placement: 'bottom',
+      placement: isMobile ? 'top' : 'bottom',
       buttons: ['primary', 'skip'],
     },
     {
-      target: '#nav-explore',
+      target: isMobile ? '#mobile-nav-explore' : '#nav-explore',
       title: t('tour.step2_title', undefined, '2. Explore & Recommendations 🎯'),
       content: t('tour.step2_desc', undefined, 'Browse verified Central & State government schemes with live eligibility criteria, instant match scores, and category filters.'),
-      placement: 'bottom',
+      placement: isMobile ? 'top' : 'bottom',
       buttons: ['back', 'primary', 'skip'],
     },
     {
-      target: '#nav-saved-schemes',
+      target: isMobile ? '#mobile-nav-saved' : '#nav-saved-schemes',
       title: t('tour.step3_title', undefined, '3. Saved Schemes & Tracker 📌'),
       content: t('tour.step3_desc', undefined, 'Bookmark schemes you qualify for with a single tap to store and track application milestones in your citizen dashboard.'),
-      placement: 'bottom',
+      placement: isMobile ? 'top' : 'bottom',
       buttons: ['back', 'primary', 'skip'],
     },
     {
-      target: '#nav-ai-advisor',
+      target: isMobile ? '#mobile-nav-ai' : '#nav-ai-advisor',
       title: t('tour.step5_title', undefined, '4. Mitra AI Scheme Advisor 🤖'),
       content: t('tour.step5_desc', undefined, 'Have queries about eligibility or guidelines? Ask Mitra, our AI Scheme Advisor 24/7 in English, Hindi, and regional languages.'),
-      placement: 'bottom',
+      placement: isMobile ? 'top' : 'bottom',
       buttons: ['back', 'primary'],
     },
   ];

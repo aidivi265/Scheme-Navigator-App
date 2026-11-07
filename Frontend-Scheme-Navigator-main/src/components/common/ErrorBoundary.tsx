@@ -36,15 +36,15 @@ export class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="min-h-[60vh] flex items-center justify-center p-6">
-          <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 text-center space-y-5 max-w-md shadow-lg">
-            <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto border border-amber-100">
+        <div className="min-h-[60vh] flex items-center justify-center p-6 transition-colors">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 sm:p-10 border border-slate-200 dark:border-slate-800 text-center space-y-5 max-w-md shadow-lg dark:shadow-none">
+            <div className="w-14 h-14 rounded-2xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto border border-amber-100 dark:border-amber-900/60">
               <AlertTriangle className="w-7 h-7" />
             </div>
 
             <div className="space-y-1">
-              <h2 className="text-xl font-bold text-slate-900">Something went wrong</h2>
-              <p className="text-xs text-slate-500 leading-relaxed">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Something went wrong</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                 We encountered an unexpected display issue with this scheme view. You can retry loading or return to the scheme catalog.
               </p>
             </div>
@@ -60,7 +60,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
               <button
                 onClick={() => window.location.reload()}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-teal-50 hover:bg-teal-100 text-teal-800 text-xs font-bold rounded-xl transition-colors cursor-pointer border border-teal-200"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-teal-50 dark:bg-teal-950/60 hover:bg-teal-100 dark:hover:bg-teal-900/80 text-teal-800 dark:text-teal-300 text-xs font-bold rounded-xl transition-colors cursor-pointer border border-teal-200 dark:border-teal-800"
               >
                 <span>Reload Page</span>
               </button>
@@ -68,7 +68,7 @@ export class ErrorBoundary extends Component<Props, State> {
               <a
                 href="#/explore"
                 onClick={() => this.setState({ hasError: false, error: null })}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl transition-colors"
               >
                 <Home className="w-3.5 h-3.5" />
                 <span>Explore Schemes</span>
