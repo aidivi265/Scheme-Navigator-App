@@ -63,10 +63,10 @@ export const OnboardingTour: React.FC = () => {
       buttons: ['back', 'primary', 'skip'],
     },
     {
-      target: isMobile ? '#mobile-nav-ai' : '#nav-ai-advisor',
+      target: isMobile ? '#mobile-nav-ai' : '#chatbot-fab-btn',
       title: t('tour.step5_title', undefined, '4. Mitra AI Scheme Advisor 🤖'),
       content: t('tour.step5_desc', undefined, 'Have queries about eligibility or guidelines? Ask Mitra, our AI Scheme Advisor 24/7 in English, Hindi, and regional languages.'),
-      placement: isMobile ? 'top' : 'bottom',
+      placement: isMobile ? 'top' : 'left',
       buttons: ['back', 'primary'],
     },
   ];

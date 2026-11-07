@@ -77,26 +77,6 @@ export const Navbar: React.FC = () => {
     ? t('common.citizen', undefined, t('common.user', undefined, authUser?.name))
     : transliterateName(authUser?.name, langCode);
 
-  const handleHowItWorksClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false);
-
-    if (location.pathname === '/' || location.pathname === '') {
-      const element = document.getElementById('how-it-works');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      navigate('/');
-      setTimeout(() => {
-        const element = document.getElementById('how-it-works');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 150);
-    }
-  };
-
   return (
     <header className="sticky top-0 z-40 w-full max-w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 shadow-xs transition-colors duration-200">
       <div className="w-full max-w-[1600px] mx-auto pl-3 sm:pl-6 lg:pl-8 xl:pl-12 pr-2.5 sm:pr-4 lg:pr-5 xl:pr-8">
@@ -148,29 +128,6 @@ export const Navbar: React.FC = () => {
             >
               <Calendar className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-amber-500 dark:text-amber-400 shrink-0" />
               <span>{t('nav.events', undefined, tp('Nearby Events'))}</span>
-            </NavLink>
-
-            <a
-              href="#how-it-works"
-              onClick={handleHowItWorksClick}
-              className="px-2 xl:px-3 py-1 xl:py-1.5 rounded-xl text-xs xl:text-sm font-semibold whitespace-nowrap text-slate-600 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900 transition-all cursor-pointer"
-            >
-              {t('nav.howItWorks')}
-            </a>
-
-            <NavLink
-              id="nav-ai-advisor"
-              to="/assistant"
-              className={({ isActive }) =>
-                `inline-flex items-center gap-1 xl:gap-1.5 px-2 xl:px-3 py-1 xl:py-1.5 rounded-xl text-xs xl:text-sm font-bold whitespace-nowrap transition-all ${
-                  isActive
-                    ? 'bg-teal-800 text-white shadow-xs'
-                    : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60 hover:bg-emerald-100/70'
-                }`
-              }
-            >
-              <Sparkles className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-emerald-500 animate-pulse shrink-0" />
-              <span>{t('nav.aiAdvisor')}</span>
             </NavLink>
 
             <NavLink
@@ -615,33 +572,6 @@ export const Navbar: React.FC = () => {
                 Active
               </span>
             </button>
-
-            <a
-              href="#how-it-works"
-              onClick={handleHowItWorksClick}
-              className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900 cursor-pointer"
-            >
-              <span>{t('nav.howItWorks')}</span>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
-            </a>
-
-            <NavLink
-              to="/assistant"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-bold ${
-                  isActive
-                    ? 'bg-teal-900 dark:bg-teal-800 text-white shadow-xs'
-                    : 'bg-teal-50 dark:bg-emerald-950/50 text-teal-900 dark:text-emerald-300 border border-teal-200/60 dark:border-emerald-700/60'
-                }`
-              }
-            >
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-emerald-500 animate-pulse" />
-                <span>{t('nav.aiAdvisor')}</span>
-              </div>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
-            </NavLink>
 
             <NavLink
               to="/about"

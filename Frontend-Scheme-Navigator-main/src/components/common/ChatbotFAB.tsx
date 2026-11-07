@@ -190,6 +190,7 @@ export const ChatbotFAB: React.FC = () => {
         )}
 
         <button
+          id="chatbot-fab-btn"
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
           aria-label="Open Mitra AI Scheme Advisor"
